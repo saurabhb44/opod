@@ -1,0 +1,518 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
+/* eslint-disable jsx-a11y/alt-text */
+import "./main.css";
+import Logo from "../assets/images/logo.png";
+import InstagramLogo from "../assets/svgs/instagram-fill.svg";
+import FacebookLogo from "../assets/svgs/facebook-box-fill.svg";
+import LinkedinLogo from "../assets/svgs/linkedin-box-fill.svg";
+import Android from "../assets/svgs/android-fill.svg";
+import Apple from "../assets/svgs/apple-fill.svg";
+import Unmute from "../assets/svgs/volume-up-line.svg";
+import Mute from "../assets/svgs/volume-mute-line.svg";
+import Player from "react-player";
+import R from "../assets/images/R.png";
+import Tick from "../assets/images/Tick.png";
+import Phone from "../assets/images/PHONE.png";
+import Watermark from "../assets/svgs/WATERMARK.svg";
+// import Video from "../assets/videos/Facebook Ads & Facebook Marketing MASTERY 2021 _ Coursenvy ®.ts";
+import { Component } from "react";
+
+const timeNow = () => {
+  var time = new Date(Date.now());
+  //   time = time.getTime();
+  var hh = time.getHours();
+  const suffix = hh >= 12 ? "PM" : "AM";
+  if (hh == 0) {
+    hh = 12;
+  }
+  if (hh > 12) {
+    hh -= 12;
+  }
+  var mm = time.getMinutes();
+  if (String(mm).length === 1) {
+    mm = "0" + mm;
+  }
+  return hh + ":" + mm + suffix;
+};
+
+export default class Main extends Component {
+  constructor() {
+    super();
+    this.state = {
+      mute: false,
+      screen: 0,
+      fetched: false,
+      videoNumber: 1,
+      videoPlay1: false,
+      videoPlay2: false,
+      videoPlay3: false,
+      videoMute1: false,
+      videoMute2: true,
+      videoMute3: true,
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        fetched: true,
+      });
+    }, 5000);
+  }
+
+  videoPlayer = () => {
+    if (this.state.videoNumber === 1) {
+      this.setState({
+        // videoMute1: false,
+        videoPlay1: !this.state.videoPlay1,
+      });
+    }
+    if (this.state.videoNumber === 2) {
+      this.setState({
+        videoPlay2: !this.state.videoPlay2,
+        // videoMute2: false,
+      });
+    }
+    if (this.state.videoNumber === 2) {
+      this.setState({
+        videoPlay3: !this.state.videoPlay3,
+        // videoMute3: false,
+      });
+    }
+  };
+
+  render() {
+    return (
+      <div
+        ref={(ref) => {
+          this.pageRef = ref;
+        }}
+        className="container"
+      >
+        <div className="header">
+          <a href="http://www.opod.in/" className="logo-image">
+            <img className="logo-image" src={Logo} />
+          </a>
+          <div className="what-we-do">WHAT WE DO?</div>
+          <div className="brand-identity-design">BRAND IDENTITY DESIGN</div>
+          <div className="social-media">
+            <div className="instagram">
+              <img height={24} src={InstagramLogo} />{" "}
+            </div>
+            <div className="linkedin">
+              <img height={24} src={LinkedinLogo} />
+            </div>
+            <div className="facebook">
+              <img height={24} src={FacebookLogo} />
+            </div>
+          </div>
+        </div>
+
+        <div className="mid-section">
+          <div className="information">
+            <span
+              style={{
+                fontFamily: "Cairo-Bold",
+              }}
+            >
+              OPOD{" "}
+            </span>{" "}
+            IS A VERNACULAR SOCIAL MEDIA APP <br /> THAT BRINGS DAILY EVENTS IN
+            A STREAM OF <br />
+            <span
+              style={{
+                fontFamily: "Cairo-Bold",
+              }}
+            >
+              {" "}
+              30 SECS AUDIO PODS{" "}
+            </span>
+          </div>
+
+          <div className="phone-section">
+            <div className="phone-left-container">
+              <div className="information">
+                HEAR MORE TO EARN MORE <br /> Work in progress!{" "}
+              </div>
+              <div className="coming-soon">COMING SOON</div>
+              <div className="platform-buttons">
+                <div className="android-button">
+                  <img height={24} src={Android} />
+                </div>
+                <div className="button-divider" />
+                <div className="ios-button">
+                  <img height={24} src={Apple} />
+                </div>
+              </div>
+            </div>
+            <div className="phone">
+              <img className="phone-svg" src={Phone} />
+
+              {/* <div className="phone-camera" /> */}
+              {this.state.fetched ? (
+                this.state.videoNumber == 1 ? (
+                  <Player
+                    id="1"
+                    className="react-player"
+                    width="200"
+                    height="340"
+                    ref={(ref) => {
+                      this.videoRef1 = ref;
+                    }}
+                    url="https://opodbucket.s3.ap-south-1.amazonaws.com/video1.mp4"
+                    controls={false}
+                    playing={this.state.videoPlay1}
+                    muted={this.state.videoMute1}
+                    onEnded={() => {
+                      this.setState({
+                        videoPlay2: true,
+                        videoNumber: 2,
+                        videoMute2: false,
+                      });
+                    }}
+                  />
+                ) : this.state.videoNumber == 2 ? (
+                  <>
+                    <Player
+                      id="2"
+                      className="react-player"
+                      width="200"
+                      height="340"
+                      ref={(ref) => {
+                        this.videoRef2 = ref;
+                      }}
+                      url="https://opodbucket.s3.ap-south-1.amazonaws.com/video3.mp4"
+                      onEnded={() => {
+                        this.setState({
+                          videoMute3: false,
+                          videoPlay3: true,
+                          videoNumber: 3,
+                        });
+                      }}
+                      controls={false}
+                      playing={this.state.videoPlay2}
+                      muted={this.state.videoMute2}
+                    />
+                  </>
+                ) : this.state.videoNumber == 3 ||
+                  this.state.videoNumber == 4 ? (
+                  <>
+                    <Player
+                      id="3"
+                      className="react-player"
+                      width="200"
+                      height="340"
+                      ref={(ref) => {
+                        this.videoRef3 = ref;
+                      }}
+                      url="https://opodbucket.s3.ap-south-1.amazonaws.com/video2.mp4"
+                      controls={false}
+                      playing={
+                        this.state.videoNumber == 3 && this.state.videoPlay3
+                      }
+                      muted={this.state.videoMute3}
+                      onEnded={() => {
+                        this.state.videoNumber == 3 &&
+                          this.setState({
+                            videoNumber: 4,
+                            videoPlay1: false,
+                            videoPlay2: false,
+                            videoPlay3: false,
+                          });
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <div className="phone-text">
+                      <span
+                        style={{
+                          color: "#6d44bc",
+                          lineHeight: "36px",
+                        }}
+                      >
+                        {" "}
+                        CONGRATULATIONS!{" "}
+                      </span>
+                      <span
+                        style={{
+                          color: "6d44bc",
+                        }}
+                      >
+                        YOU HAVE EARNED{" "}
+                      </span>
+                      <span
+                        style={{
+                          color: "#25b254",
+                        }}
+                      >
+                        {" "}
+                        23 POD COINS{" "}
+                      </span>
+                    </div>
+                    <div className="lower-section">
+                      <div className="purple-box">
+                        Sign Up for daily audio pods to redeem your coins
+                      </div>
+                      <div>APP COMING SOON</div>
+                    </div>
+                  </>
+                )
+              ) : (
+                <>
+                  <div className="phone-text">
+                    FETCHING PODS TILL
+                    <div className="phone-text-bold">{timeNow()}</div>
+                  </div>
+                  <div className="phone-radar-area">
+                    <div className="phone-central-circle" />
+                    <div className="phone-radar-inner-ring ring-1" />
+                    <div className="phone-radar-inner-ring ring-2" />
+                    <div className="phone-radar-inner-ring ring-3" />
+                    {/* <div className="phone-radar-inner-ring ring-4" /> */}
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="phone-right-container">
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoMute1: !this.state.videoMute1,
+                    videoMute2: !this.state.videoMute2,
+                    videoMute3: !this.state.videoMute3,
+                  });
+                }}
+                className="volume-button"
+              >
+                <img
+                  height={24}
+                  src={this.state.videoMute1 === true ? Unmute : Mute}
+                />
+              </div>
+            </div>
+          </div>
+          {this.state.videoNumber === 5 ? (
+            <div className="r-button">
+              <img
+                style={{
+                  height: 48,
+                  width: 48,
+                }}
+                src={R}
+              ></img>
+            </div>
+          ) : this.state.videoNumber === 4 ? (
+            <div
+              onClick={() => {
+                this.setState({
+                  videoNumber: 5,
+                });
+              }}
+              className="r-button"
+            >
+              <img
+                style={{
+                  height: 48,
+                  width: 48,
+                }}
+                src={Tick}
+              ></img>
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                this.state.fetched && this.videoPlayer();
+              }}
+              style={{
+                backgroundColor: this.state.fetched ? "#EAB611" : "#5e5e5e",
+                borderColor: this.state.fetched ? "#6D44BC" : "#b4b4b4",
+                cursor: "pointer",
+              }}
+              className="bottom-button"
+            ></div>
+          )}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              height: 500,
+              width: 500,
+              overflow: "hidden",
+              zIndex: -1
+            }}
+          >
+            <img
+              style={{
+                height: 1000,
+                width: 1000,
+              }}
+              src={Watermark}
+            />
+          </div>
+        </div>
+
+        {/* {this.state.fetched ? (
+          <div className="lower-mobile-section">
+            <div className="lower-whole-container">
+              <div className="phone">
+                <div className="phone-camera" />
+                <Player
+                  className="react-player"
+                  width="200"
+                  height="340"
+                  ref={(ref) => {
+                    this.videoRef1 = ref;
+                  }}
+                  url="/Videos/video1.mp4"
+                  controls={false}
+                  playing={this.state.videoPlay1}
+                  muted={this.state.videoMute1}
+                  onEnded={() => {
+                    this.setState({
+                      videoMute2: false,
+                      videoPlay2: true,
+                    });
+                  }}
+                />
+              </div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoPlay1: !this.state.videoPlay1,
+                  });
+                }}
+                style={{
+                  backgroundColor: "#EAB611",
+                  borderColor: "#6D44BC",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  cursor: "pointer",
+                }}
+                className="bottom-button"
+              ></div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoMute1: !this.state.videoMute1,
+                  });
+                }}
+                className="volume-button-1"
+              >
+                <img height={24} src={this.state.videoMute1 ? Unmute : Mute} />
+              </div>
+            </div>
+            <div
+              style={{
+                display: this.state.fetched ? "flex" : "none",
+              }}
+              className="lower-whole-container"
+            >
+              <div className="phone">
+                <div className="phone-camera" />
+                <Player
+                  className="react-player"
+                  width="200"
+                  height="340"
+                  ref={(ref) => {
+                    this.videoRef2 = ref;
+                  }}
+                  url="/Videos/video1.mp4"
+                  onEnded={() => {
+                    this.setState({
+                      videoMute3: false,
+                      videoPlay3: true,
+                    });
+                  }}
+                  controls={false}
+                  playing={this.state.videoPlay2}
+                  muted={this.state.videoMute2}
+                />
+              </div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoPlay2: !this.state.videoPlay2,
+                  });
+                }}
+                style={{
+                  backgroundColor: "#EAB611",
+                  borderColor: "#6D44BC",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  cursor: "pointer",
+                }}
+                className="bottom-button"
+              ></div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoMute2: !this.state.videoMute2,
+                  });
+                }}
+                className="volume-button-1"
+              >
+                <img height={24} src={this.state.videoMute2 ? Unmute : Mute} />
+              </div>
+            </div>
+            <div className="lower-whole-container">
+              <div className="phone">
+                <div className="phone-camera" />
+                <Player
+                  className="react-player"
+                  width="200"
+                  height="340"
+                  ref={(ref) => {
+                    this.videoRef3 = ref;
+                  }}
+                  url="/Videos/video1.mp4"
+                  controls={false}
+                  playing={this.state.videoPlay3}
+                  muted={this.state.videoMute3}
+                />
+              </div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoPlay3: !this.state.videoPlay3,
+                  });
+                }}
+                style={{
+                  backgroundColor: "#EAB611",
+                  borderColor: "#6D44BC",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  cursor: "pointer",
+                }}
+                className="bottom-button"
+              ></div>
+              <div
+                onClick={() => {
+                  this.setState({
+                    videoMute3: !this.state.videoMute3,
+                  });
+                }}
+                className="volume-button-1"
+              >
+                <img height={24} src={this.state.videoMute3 ? Unmute : Mute} />
+              </div>
+            </div>
+          </div>
+        ) : null} */}
+
+        <div className="divider"></div>
+        <div className="footer">
+          <div className="company-details">
+            OPOD MEDIA LLP. MUMBAI <br />
+            email: hello@opod.in
+          </div>
+
+          <div className="contact-now">CONTACT NOW!</div>
+          <div className="privacy-policy">PRIVACY POLICY</div>
+          <div className="careers">CAREERS</div>
+          <div className="terms-and-conditions">TERMS {"&"} CONDITIONS</div>
+        </div>
+      </div>
+    );
+  }
+}
