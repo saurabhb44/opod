@@ -5,6 +5,7 @@ import Logo from "../assets/images/logo.png";
 import InstagramLogo from "../assets/svgs/instagram-fill.svg";
 import FacebookLogo from "../assets/svgs/facebook-box-fill.svg";
 import LinkedinLogo from "../assets/svgs/linkedin-box-fill.svg";
+import mascot from "../assets/images/mascot.png";
 import Android from "../assets/svgs/android-fill.svg";
 import Apple from "../assets/svgs/apple-fill.svg";
 import Unmute from "../assets/svgs/volume-up-line.svg";
@@ -13,9 +14,11 @@ import Player from "react-player";
 import R from "../assets/images/R.png";
 import Tick from "../assets/images/Tick.png";
 import Phone from "../assets/images/PHONE.png";
+import Reward from "../assets/images/reward.png";
 import Watermark from "../assets/svgs/WATERMARK.svg";
 // import Video from "../assets/videos/Facebook Ads & Facebook Marketing MASTERY 2021 _ Coursenvy ®.ts";
 import { Component } from "react";
+import { useHistory } from "react-router";
 
 const timeNow = () => {
   var time = new Date(Date.now());
@@ -88,25 +91,6 @@ export default class Main extends Component {
         }}
         className="container"
       >
-        <div className="header">
-          <a href="http://www.opod.in/" className="logo-image">
-            <img className="logo-image" src={Logo} />
-          </a>
-          <div className="what-we-do">WHAT WE DO?</div>
-          <div className="brand-identity-design">BRAND IDENTITY DESIGN</div>
-          <div className="social-media">
-            <div className="instagram">
-              <img height={24} src={InstagramLogo} />{" "}
-            </div>
-            <div className="linkedin">
-              <img height={24} src={LinkedinLogo} />
-            </div>
-            <div className="facebook">
-              <img height={24} src={FacebookLogo} />
-            </div>
-          </div>
-        </div>
-
         <div className="mid-section">
           <div className="information">
             <span
@@ -130,6 +114,9 @@ export default class Main extends Component {
 
           <div className="phone-section">
             <div className="phone-left-container">
+              <div>
+                <img src={mascot} alt="mascot" height="100px" width="100px" />
+              </div>
               <div className="information">
                 HEAR MORE TO EARN MORE <br /> Work in progress!{" "}
               </div>
@@ -231,23 +218,28 @@ export default class Main extends Component {
                         }}
                       >
                         {" "}
-                        CONGRATULATIONS!{" "}
+                        CONGRATULATIONS!
                       </span>
                       <span
                         style={{
                           color: "6d44bc",
                         }}
                       >
-                        YOU HAVE EARNED{" "}
+                        YOU HAVE EARNED
                       </span>
                       <span
                         style={{
                           color: "#25b254",
                         }}
                       >
-                        {" "}
-                        23 POD COINS{" "}
+                        23 POD COINS
                       </span>
+                      <img
+                        src={Reward}
+                        alt="congratulations"
+                        height="80px"
+                        width="80px"
+                      />
                     </div>
                     <div className="lower-section">
                       <div className="purple-box">
@@ -317,6 +309,7 @@ export default class Main extends Component {
                 }}
                 src={Tick}
               ></img>
+              <div class="r-button-text">Click to collect rewards</div>
             </div>
           ) : (
             <div
@@ -339,7 +332,7 @@ export default class Main extends Component {
               height: 500,
               width: 500,
               overflow: "hidden",
-              zIndex: -1
+              zIndex: -1,
             }}
           >
             <img
@@ -500,8 +493,8 @@ export default class Main extends Component {
           </div>
         ) : null} */}
 
-        <div className="divider"></div>
-        <div className="footer">
+        {/* <div className="divider"></div> */}
+        {/* <div className="footer">
           <div className="company-details">
             OPOD MEDIA LLP. MUMBAI <br />
             email: hello@opod.in
@@ -511,7 +504,7 @@ export default class Main extends Component {
           <div className="privacy-policy">PRIVACY POLICY</div>
           <div className="careers">CAREERS</div>
           <div className="terms-and-conditions">TERMS {"&"} CONDITIONS</div>
-        </div>
+        </div> */}
       </div>
     );
   }
